@@ -51,11 +51,22 @@ export default class App extends React.Component {
   );
 
   renderMapView = () => (
-    <MapView
-      region={this.state.region}
-      style={styles.map}
-    >
-    </MapView>
+    <View style={styles.topWrapper}>
+      <View style={styles.mapWrapper}>
+        <MapView
+          region={this.state.region}
+          style={styles.map}
+        >
+        </MapView>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.closeMapView}
+          activeOpacity={1}
+        >
+          <Text style={styles.buttonText}>close the map</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 
   render() {
@@ -111,5 +122,34 @@ const styles = StyleSheet.create({
   map: {
     alignSelf: 'stretch',
     flex: 1,
-  }
+  },
+  topWrapper: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mapWrapper: {
+    width: '90%',
+    height: '50%',
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  button: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 15,
+    backgroundColor: '#fff',
+    width: '100%',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontFamily: 'Raleway',
+    textAlign: 'center',
+    color: '#000',
+  },
 });
