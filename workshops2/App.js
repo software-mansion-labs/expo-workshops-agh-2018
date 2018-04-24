@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ddd',
   },
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     flexDirection: 'row',
@@ -77,7 +77,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     margin: 5,
+    marginTop: 10,
   },
+  header: {
+    fontSize: 22,
+    fontWeight: '700',
+  },
+  subheading: {
+    fontSize: 18,
+    marginTop: 3,
+    color: '#999',
+    fontFamily: 'Raleway',
+  }
 });
