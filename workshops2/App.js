@@ -1,5 +1,5 @@
 import React from 'react';
-import { Font, AppLoading, Permissions } from 'expo';
+import { Font, AppLoading, Permissions, MapView } from 'expo';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import data from './data';
 
@@ -8,6 +8,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      region: null,
     };
   }
 
@@ -20,12 +21,20 @@ export default class App extends React.Component {
     this.setState({ loading: false });
   }
 
-  renderCard = (
-    { name, country, region: { latitude, longitude }}
-  ) => (
+  showCountry = ({ latitude: latitude, longitude: longitude }
+  ) => this.setState({
+    region: {
+      latitude,
+      longitude,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.05
+    }
+  });
+
+  renderCard = ({ name, country, region }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => {}}
+      onPress={() => this.showCountry(region)}
     >
       <Text style={styles.header}>{name}</Text>
       <Text style={styles.subheading}>{country}</Text>
@@ -42,13 +51,22 @@ export default class App extends React.Component {
     </View>
   );
 
+  renderMapView = () => (
+    <MapView
+      region={this.state.region}
+      style={styles.map}
+    >
+    </MapView>
+  );
+
   render() {
-    const { loading } = this.state;
+    const { loading, region } = this.state;
 
     if (loading) return <AppLoading />;
 
     return (
       <View style={styles.center}>
+        {region !== null && this.renderMapView()}
         <View style={styles.container}>{this.renderCards()}</View>
       </View>
     );
@@ -90,5 +108,8 @@ const styles = StyleSheet.create({
     marginTop: 3,
     color: '#999',
     fontFamily: 'Raleway',
+  },
+  map: {
+    flex: 1,
   }
 });
