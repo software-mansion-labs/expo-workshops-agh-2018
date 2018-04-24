@@ -1,6 +1,6 @@
 import React from 'react';
 import { Font, AppLoading, Permissions, MapView } from 'expo';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import data from './data';
 
 export default class App extends React.Component {
@@ -30,6 +30,8 @@ export default class App extends React.Component {
     }
   });
 
+  closeMapView = () => this.setState({ region: null });
+
   renderCard = ({ name, country, region }) => (
     <TouchableOpacity
       style={styles.card}
@@ -53,18 +55,20 @@ export default class App extends React.Component {
   renderMapView = () => (
     <View style={styles.topWrapper}>
       <View style={styles.mapWrapper}>
-        <MapView
-          region={this.state.region}
-          style={styles.map}
-        >
-        </MapView>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={this.closeMapView}
-          activeOpacity={1}
-        >
-          <Text style={styles.buttonText}>close the map</Text>
-        </TouchableOpacity>
+        <View style={styles.roundWrapper}>
+          <MapView
+            region={this.state.region}
+            style={styles.map}
+          >
+          </MapView>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.closeMapView}
+            activeOpacity={1}
+          >
+            <Text style={styles.buttonText}>close the map</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -130,12 +134,21 @@ const styles = StyleSheet.create({
     zIndex: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  roundWrapper: {
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+    borderRadius: 10000,
   },
   mapWrapper: {
-    width: '90%',
-    height: '50%',
+    width: Dimensions.get('window').width - 50,
+    height: Dimensions.get('window').width - 50,
     padding: 10,
     backgroundColor: '#fff',
+    borderRadius: 1000000,
+    overflow: 'hidden',
   },
   button: {
     position: 'absolute',
