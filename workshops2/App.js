@@ -21,8 +21,7 @@ export default class App extends React.Component {
     this.setState({ loading: false });
   }
 
-  showCountry = ({ latitude: latitude, longitude: longitude }
-  ) => this.setState({
+  showCountry = ({ latitude, longitude }) => this.setState({
     region: {
       latitude,
       longitude,
@@ -110,6 +109,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway',
   },
   map: {
+    alignSelf: 'stretch',
     flex: 1,
   }
 });
