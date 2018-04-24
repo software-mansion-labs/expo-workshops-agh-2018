@@ -49,7 +49,7 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.center}>
-        <View style={styles.cotainer}>{this.renderCards()}</View>
+        <View style={styles.container}>{this.renderCards()}</View>
       </View>
     );
   }
@@ -62,13 +62,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingVertical: 25,
+    paddingHorizontal: 10,
+    flex: 1,
   },
-  kwadracik: {
-    width: 50,
-    height: 50,
+  card: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    margin: 5,
   },
 });
